@@ -80,11 +80,13 @@ class OrderStatus extends React.Component<OrderStatusProps, OrderStatusState> {
         />
         <Counter
           title="Failure"
+          color="red"
           count={ this.props.failure }
         />
         <Counter
           title="Error Rate"
           count={ this.state.errorRate }
+          unit="%"
         />
       </MonitorCard>
     )
