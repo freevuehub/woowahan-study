@@ -13,7 +13,7 @@ export default (
   action: ActionType<typeof Actions>
 ) => {
   switch (action.type) {
-    case getType(Actions.stopMonitoring):
+    case getType(Actions.startMonitoring):
       return {
         ...state,
         monitoring: true
