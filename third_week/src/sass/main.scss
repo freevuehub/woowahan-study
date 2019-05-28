@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body {
+  background: #ddd;
+  padding: 30px;
+}
+
+.wrapper {
+  display: flex;
+}
+.item {
+  font-family: Roboto;
+  flex: 1;
+  text-align: center;
+  border-right: 1px solid #eee;
+
+  p:first-child {
+    font-size: 14px;
+    color: #444;
+  }
+  p:last-child {
+    font-size: 32px;
+    font-weight: bold;
+    color: #444;
+  }
+}
+.item:last-child {
+  border-right: none;
+}
+.unit {
+  font-size: 18px;
+  color: #888;
+}
