@@ -41,4 +41,9 @@ antd의 그리드 및 플렉스 시스템 소개
 
 antd를 이용하여 레이어웃 잡기
 
+리엑트 라우터
+
+switch는 하위 children에 라우트 정보를 넘긴다.
+하지만 children의 자식요소 중 Route는 접근할 수 없어서 Route를 다시 Switch로 감싸야 작동한다.
+
 --
