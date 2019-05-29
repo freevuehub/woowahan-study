@@ -19,5 +19,5 @@ function* fetchOrderTimeline() {
     result: { successTimeline, failureTimeline }
   } = yield call(Api.fetchOrderTimeline, moment().format('YYYYMMDD'));
 
-  // yield put(Actions)
+   // yield put(Actions.)
 }

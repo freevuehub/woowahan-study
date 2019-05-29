@@ -11,13 +11,6 @@ export const showNotification = createAction(
   }
 );
 
-export const startMonitoring = createAction(
-  '@command/monitoring/start',
-  resolve => {
-    return () => resolve();
-  }
-);
-
 export const showOrderTimelineChart = createAction(
   '@command/timeline/chart/show',
   resolve => {
@@ -32,6 +25,13 @@ export const hideOrderTimelineChart = createAction(
   }
 );
 
+export const startMonitoring = createAction(
+  '@command/monitoring/start',
+  resolve => {
+    return () => resolve();
+  }
+);
+
 export const stopMonitoring = createAction(
   '@command/monitoring/stop',
   resolve => {
@@ -39,10 +39,23 @@ export const stopMonitoring = createAction(
   }
 );
 
-export const fetchSuccess = createAction('@fetch/success', resolve => {
-  return () => resolve();
-});
+export const updateOrderStatus = createAction(
+  '@update/order/status',
+  resolve => {
+    return (success: number, failure: number) => resolve({ success, failure });
+  }
+);
 
-export const fetchFailure = createAction('@fetch/failure', resolve => {
-  return () => resolve();
-});
+export const fetchOrderTimeline = createAction(
+  '@fetch/order/timeline',
+  resolve => {
+    return (date: string) => resolve(date);
+  }
+);
+
+export const updateOrderTimeline = createAction(
+  '@update/order/timeline',
+  resolve => {
+    return (success: [], failure: []) => resolve({ success, failure });
+  }
+);
