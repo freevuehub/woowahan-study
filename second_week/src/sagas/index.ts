@@ -39,7 +39,12 @@ function* monitorWorkflow() {
           yield fork(fetchOrderTimeline);
         }
 
-
+        yield put(
+          Actions.updateOrderStatus(
+            succResp.result.success,
+            failResp.result.failure
+          )
+        );
       } catch (e) {
         if (e instanceof Api.ApiError) {
           yield put(Actions.addNotification('Error', e.errorMessage));
@@ -47,6 +52,21 @@ function* monitorWorkflow() {
           console.error(e);
         }
       }
+
+      const { monitoring, duration }: StoreState = yield select();
+
+      if (!monitoring) polling = false;
+
+      yield delay(duration);
     }
   }
+}
+
+function* watchFetchOrderTimeline() {
+  yield takeLatest(getType(Actions.showOrderTimelineChart), fetchOrderTimeline);
+}
+
+export default function*() {
+  yield fork(monitorWorkflow);
+  yield fork(watchFetchOrderTimeline);
 }
