@@ -19,5 +19,34 @@ function* fetchOrderTimeline() {
     result: { successTimeline, failureTimeline }
   } = yield call(Api.fetchOrderTimeline, moment().format('YYYYMMDD'));
 
-   // yield put(Actions.)
+  yield put(Actions.updateOrderTimeline(successTimeline, failureTimeline));
+}
+
+function* monitorWorkflow() {
+  while (yield take(getType(Actions.startMonitoring))) {
+    let polling = true;
+
+    while (polling) {
+      try {
+        const [succResp, failResp] = yield all([
+          call(Api.fetchNumberOfSuccessFullOrder),
+          call(Api.fetchNumberOfFailureOrder)
+        ]);
+
+        const { showTimeline }: StoreState = yield select();
+
+        if (showTimeline) {
+          yield fork(fetchOrderTimeline);
+        }
+
+
+      } catch (e) {
+        if (e instanceof Api.ApiError) {
+          yield put(Actions.addNotification('Error', e.errorMessage));
+        } else {
+          console.error(e);
+        }
+      }
+    }
+  }
 }
